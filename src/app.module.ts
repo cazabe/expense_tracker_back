@@ -11,7 +11,7 @@ import { ExpensesModule } from './expenses/expenses.module';
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '',
+    password: 'clave1234',
     database: 'expense_tracker',
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,
