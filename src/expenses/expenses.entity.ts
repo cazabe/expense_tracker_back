@@ -8,12 +8,18 @@ export class Expenses {
     expense_id: number
     @Column()
     description: string
+    @Column({ type: 'numeric', precision: 5, scale: 2, })
+    amount: number
     @Column()
     paymant_type: string
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
     created: Date;
-    @Column()
+    @Column({ type: 'char', length: 1 })
     status: string
-    @ManyToOne(() => User, user => user.expenses)
+    @Column({ type: 'varchar', length: 200 })
+    user_name: string
+    @Column({ type: 'int' })
+    user_id: number
+    @ManyToOne(() => User, (user) => user.expenses)
     user: User
 }
