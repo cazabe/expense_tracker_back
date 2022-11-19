@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Expenses } from './expenses.entity';
-import { ExpenseDTO } from './dto/expenses_dto';
 import { Repository } from 'typeorm';
+import { ExpenseDto } from './dto/expense_dto';
+import { Expenses } from './expenses.entity';
 
 @Injectable()
 export class ExpensesService {
-    constructor(@InjectRepository(Expenses) private expenseRepository: Repository<Expenses>) { }
+    constructor(@InjectRepository(Expenses) private expensesRepository: Repository<Expenses>) { }
 
-    createExpense(expense: ExpenseDTO) {
-        const newExpense = this.expenseRepository.create(expense);
-        return this.expenseRepository.save(newExpense);
+    async createExpense(expense: ExpenseDto) {
+        const newExpense = this.expensesRepository.create(expense);
+        await this.expensesRepository.save(newExpense);
     }
 
-    getExpense() {
-        return this.expenseRepository.find();
+    getExpenses() {
+        return this.expensesRepository.find();
     }
 }
