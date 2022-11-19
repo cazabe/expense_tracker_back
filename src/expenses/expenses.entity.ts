@@ -1,5 +1,5 @@
 import { User } from 'src/users/user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'expenses' })
 export class Expenses {
@@ -14,6 +14,9 @@ export class Expenses {
     created: Date;
     @Column()
     status: string
-    @ManyToOne(() => User, user => user.expenses)
+    @ManyToOne(() => User, user => user.expenses, { eager: true })
+    @JoinColumn({ name: 'user_id', referencedColumnName: 'user_id' })
     user: User
+    @Column()
+    user_id: number;
 }
